@@ -1,0 +1,34 @@
+<% form_tag csv_import_transactions_path, :multipart => true do  -%>
+<table border="1">
+<tr>
+    <td>
+        <label for="vle_user">
+            Select a CSV File :
+        </label>
+    </td>
+    <td>
+        <%= file_field_tag :file -%>
+    </td>
+</tr>
+<tr>
+      <td>
+        <label for="vle_user">
+            Select a Date :
+        </label>
+    </td>
+    <td>
+        <%= text_field_tag :start_date, Time.now.strftime('%d-%m-%Y') -%>
+    </td>
+</tr>
+ <tr>
+      <td colspan='2' align="right">
+        <%= submit_tag 'Submit' -%>
+    </td>
+</tr>
+</table>
+<% end -%>
+<script>
+    $(function() {
+        $("#start_date").datepicker({dateFormat:'dd-mm-yy', maxDate:0 });
+    });
+</script>

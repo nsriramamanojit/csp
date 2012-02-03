@@ -1,0 +1,20 @@
+<div class="form-container">
+    <p class="legend">
+        <strong>Note:</strong>
+        Required fields are marked with an asterisk (<em>*</em>)
+    </p>
+<%= simple_form_for(@account,:validate => true) do |f| %>
+      <fieldset>
+
+  <%= f.input :name, :label => 'Enter Name of CSP' %>
+  <%= f.input :csp_code, :label => 'Enter CSP Code' %>
+  <%= f.input :mobile, :label => 'Enter Mobile Number' %>
+  <%= f.input :bank_name, :label => 'Enter Bank Name', :input_html => { :value => 'SBI' } %>
+  <%= f.input :bank_branch,:label=>"Enter Branch Name" %>
+  <%= f.input :bank_code,:label=>"Enter Branch Code" %>
+  <%= f.input :account_number, :label=>"Enter Account Number" %>
+  <%= f.submit 'Save',:disable_with=>'Please wait...'%>
+        </fieldset>
+
+  <% end %>
+</div>

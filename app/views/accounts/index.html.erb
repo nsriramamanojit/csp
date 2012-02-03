@@ -1,0 +1,47 @@
+<h3>Accounts | Manage Accounts</h3>
+<div class="help_text">
+  * List of All CSP Accounts.<br/>
+</div>
+<%= link_to 'New Account', {:action => :new}, :class=>'more tipTip2', :title => "Create New State" %>&nbsp;
+<%= link_to 'Import Accounts', "#", :class=>'more tipTip2', :title => "Create New State", :id=>'add_new' %>&nbsp;
+<div id="new_form">
+  <%= render 'upload' %>
+</div>
+
+<div class="list">
+  <table class="tablesorter" cellspacing="1">
+    <thead>
+    <tr>
+      <th>SNo</th>
+      <th>CSP Operator</th>
+      <th>CSP Code</th>
+      <th>Phone</th>
+      <th>District</th>
+      <th>Bank</th>
+      <th>Branch</th>
+      <th>Branch Code</th>
+      <th>Account No</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <% i=1 %>
+    <% @accounts.each do |account| %>
+        <tr align="left">
+          <td><%= i %></td>
+          <td><%= highlight(account.name,params[:search]) %></td>
+          <td align="center"><%= highlight(account.csp_code,params[:search]) %></td>
+          <td><%= account.mobile %></td>
+          <td><%= account.district %></td>
+          <td><%= account.bank_name %></td>
+          <td><%= account.bank_branch %></td>
+          <td><%= account.bank_code %></td>
+          <td><%= account.account_number %></td>
+          <td align="center"><%= link_to "Edit", "#"%></td>
+        </tr>
+        <% i = i + 1 %>
+    <% end %>
+  </table>
+</div>
+<div class="flickr_pagination">
+  <%= page_entries_info @accounts, :entry_name => 'Accounts' %> <%= will_paginate @accounts, :container => false %>
+</div>

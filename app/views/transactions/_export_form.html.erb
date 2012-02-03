@@ -1,0 +1,25 @@
+<% form_tag export_transactions_path, :multipart => true do  -%>
+<table border="1">
+
+<tr>
+      <td>
+        <label for="vle_user">
+            Select a Date :
+        </label>
+    </td>
+    <td>
+        <%= text_field_tag :date_selected, Time.now.strftime('%d-%m-%Y') -%>
+    </td>
+</tr>
+ <tr>
+      <td colspan='2' align="right">
+        <%= submit_tag 'Submit' -%>
+    </td>
+</tr>
+</table>
+<% end -%>
+<script>
+    $(function() {
+        $("#date_selected").datepicker({dateFormat:'dd-mm-yy', maxDate:0 });
+    });
+</script>

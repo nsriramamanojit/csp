@@ -1,0 +1,49 @@
+<h3>Accounts | Manage Accounts</h3>
+<div class="help_text">
+  * List of All CSP Transactions.<br/>
+</div>
+ <%= link_to 'Import Accounts', "#", :class=>'more', :id=>'add_new' %>&nbsp;
+ <%= link_to 'Export Statement' ,"#", :class=>'more',:id=>'export_add' %>&nbsp;
+<div id="new_form">
+  <%= render 'upload' %>
+</div>
+<div id="export_form">
+  <%= render 'export_form' %>
+</div>
+<div class="list">
+  <table class="tablesorter" cellspacing="1">
+    <thead>
+    <tr>
+      <th>SNo</th>
+      <th>Date</th>
+      <th>CSP Code</th>
+<!--
+      <th>CSP Name</th>
+      <th>Account No</th>
+      <th>Branch</th>
+-->
+      <th>Holding Amount</th>
+    </tr>
+    </thead>
+    <% i=1 %>
+    <% @transactions.each do |tr| %>
+        <tr align="left">
+          <td><%= i %></td>
+          <td><%= tr.transaction_date.strftime("%d-%m-%Y") %></td>
+          <td><%= tr.csp_code %></td>
+<!--
+          <td><%# get_csp_name(tr) %></td>
+          <td><%# get_csp_account_number(tr)  %></td>
+          <td><%# get_csp_branch(tr)  %></td>
+-->
+
+          <td align="right"><%= tr.amount %></td>
+
+        </tr>
+        <% i = i + 1 %>
+    <% end %>
+  </table>
+</div>
+<div class="flickr_pagination">
+  <%= page_entries_info @transactions, :entry_name => 'Transactions' %> <%= will_paginate @transactions, :container => false %>
+</div>
