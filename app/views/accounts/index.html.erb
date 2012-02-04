@@ -30,7 +30,7 @@
     <% @accounts.each do |account| %>
         <tr align="left">
           <td><%= i %></td>
-          <td><%= highlight(account.name,params[:search]) %></td>
+          <td><%= link_to highlight(account.name,params[:search]) , account,:class => "link" %></td>
           <td align="center"><%= highlight(account.csp_code,params[:search]) %></td>
           <td><%= account.mobile %></td>
           <td><%= account.district %></td>
@@ -38,7 +38,7 @@
           <td><%= account.bank_branch %></td>
           <td><%= account.bank_code %></td>
           <td><%= account.account_number %></td>
-          <td align="center"><%= link_to "Edit", "#"%></td>
+          <td align="center"><%= link_to "Edit", edit_account_path(account)%></td>
         </tr>
         <% i = i + 1 %>
     <% end %>

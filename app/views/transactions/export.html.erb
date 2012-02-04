@@ -1,4 +1,4 @@
-<h3 align="center">Account Statement for <%= params[:date_selected] %> </h3>
+<h3 align="center">CSP Fund Transfer Statement of <%= params[:date_selected] %> </h3>
 <br/>
 <% total = 0 %>
 <table cellspacing="1" border="1" align="center">
@@ -21,13 +21,13 @@
         <td><%= get_csp_account_number(tr) %></td>
         <td><%= get_csp_branch(tr) %></td>
         <% amount = (-1) * tr.amount %>
-        <td align="right"><%= amount % 100 == 0 ? amount : amount - (amount % 100) %></td>
+        <td align="right"><%= amount= amount % 100 == 0 ? amount : amount - (amount % 100) %></td>
         <% total += amount %>
       </tr>
       <% i = i + 1 %>
   <% end %>
   <tr>
-    <td colspan="5" align="right">Total Amount</td>
+    <td colspan="5" align="right">Total</td>
     <td align="right"><%= total %></td>
   </tr>
 </table>

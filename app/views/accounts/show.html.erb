@@ -1,5 +1,23 @@
-<p id="notice"><%= notice %></p>
-
-
-<%= link_to 'Edit', edit_account_path(@account) %> |
-<%= link_to 'Back', accounts_path %>
+<h3>Accounts | View Account Details</h3>
+<div class="formbox">
+  <div class="desc">CSP Code : <%= @account.csp_code %></div>
+  <div class="divider"></div>
+  <div class="desc">CSP Name : <%= @account.name %></div>
+  <div class="divider"></div>
+  <div class="desc">Phone : <%= @account.mobile %></div>
+  <div class="divider"></div>
+  <div class="desc">District : <%= @account.district %></div>
+  <div class="divider"></div>
+  <div class="desc">Bank : <%= @account.bank_name %></div>
+  <div class="divider"></div>
+  <div class="desc">Branch : <%= @account.bank_branch %></div>
+  <div class="divider"></div>
+  <div class="desc">Branch Code : <%= @account.bank_code %></div>
+  <div class="divider"></div>
+  <div class="desc">Account Number : <%= @account.account_number %></div>
+  <div class="divider"></div>
+</div>
+<div class="bottom_links">
+  <%= link_to 'Edit', edit_account_path(@account), :class=>"more" %>
+  <%= link_to 'Back to Accounts', accounts_path, :class=>"more", %>
+</div>
