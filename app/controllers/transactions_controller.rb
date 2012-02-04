@@ -73,14 +73,7 @@ class TransactionsController < ApplicationController
 
   end
   def csv_import
-    if params[:file] == ""
-      flash[:error]= "Something went wrong Please Check"
-      respond_to do |format|
-        format.html { redirect_to(transactions_path) }
-        format.xml  { head :ok }
-      end
 
-   else
     csv_file = params[:file]
     n=0
     CSV.new(csv_file.tempfile,:col_sep => ",").each do |row|
@@ -96,7 +89,6 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(transactions_path) }
       format.xml  { head :ok }
-    end
     end
   end
   def export
