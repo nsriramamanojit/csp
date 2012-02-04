@@ -2,8 +2,10 @@
 <div class="help_text">
   * List of All CSP Accounts.<br/>
 </div>
-<%= link_to 'New Account', {:action => :new}, :class=>'more tipTip2', :title => "Create New State" %>&nbsp;
-<%= link_to 'Import Accounts', "#", :class=>'more tipTip2', :title => "Create New State", :id=>'add_new' %>&nbsp;
+<%= link_to 'New Account', {:action => :new}, :class=>'more' %>&nbsp;
+<%= link_to 'Import Accounts', "#", :class=>'more ',  :id=>'add_new' %>&nbsp;
+<%= link_to 'Transactions Statement', transactions_path, :class=>'more'%>&nbsp;
+
 <div id="new_form">
   <%= render 'upload' %>
 </div>

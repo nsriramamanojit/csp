@@ -2,8 +2,9 @@
 <div class="help_text">
   * List of All CSP Transactions.<br/>
 </div>
- <%= link_to 'Import Accounts', "#", :class=>'more', :id=>'add_new' %>&nbsp;
+ <%= link_to 'Import Statment', "#", :class=>'more', :id=>'add_new' %>&nbsp;
  <%= link_to 'Export Statement' ,"#", :class=>'more',:id=>'export_add' %>&nbsp;
+ <%= link_to 'Accounts' ,accounts_path, :class=>'more' %>&nbsp;
 <div id="new_form">
   <%= render 'upload' %>
 </div>

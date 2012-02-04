@@ -1,8 +1,6 @@
 class TransactionsController < ApplicationController
-  # GET /transactions
-  # GET /transactions.xml
   def index
-    @transactions = Transaction.paginate(:page =>params[:page], :per_page=>20).order("csp_code ASC")
+    @transactions = Transaction.paginate(:page =>params[:page], :per_page=>20)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,8 +8,6 @@ class TransactionsController < ApplicationController
     end
   end
 
-  # GET /transactions/1
-  # GET /transactions/1.xml
   def show
     @transaction = Transaction.find(params[:id])
 
@@ -21,8 +17,6 @@ class TransactionsController < ApplicationController
     end
   end
 
-  # GET /transactions/new
-  # GET /transactions/new.xml
   def new
     @transaction = Transaction.new
 
@@ -32,13 +26,10 @@ class TransactionsController < ApplicationController
     end
   end
 
-  # GET /transactions/1/edit
   def edit
     @transaction = Transaction.find(params[:id])
   end
 
-  # POST /transactions
-  # POST /transactions.xml
   def create
     @transaction = Transaction.new(params[:transaction])
 
@@ -53,8 +44,6 @@ class TransactionsController < ApplicationController
     end
   end
 
-  # PUT /transactions/1
-  # PUT /transactions/1.xml
   def update
     @transaction = Transaction.find(params[:id])
 
@@ -69,8 +58,6 @@ class TransactionsController < ApplicationController
     end
   end
 
-  # DELETE /transactions/1
-  # DELETE /transactions/1.xml
   def destroy
     @transaction = Transaction.find(params[:id])
     @transaction.destroy
@@ -84,6 +71,14 @@ class TransactionsController < ApplicationController
 
   end
   def csv_import
+    if params[:file] == ""
+      flash[:error]= "Something went wrong Please Check"
+      respond_to do |format|
+        format.html { redirect_to(transactions_path) }
+        format.xml  { head :ok }
+      end
+
+   else
     csv_file = params[:file]
     n=0
     CSV.new(csv_file.tempfile,:col_sep => ",").each do |row|
@@ -100,10 +95,10 @@ class TransactionsController < ApplicationController
       format.html { redirect_to(transactions_path) }
       format.xml  { head :ok }
     end
-
+    end
   end
   def export
-    @transactions = Transaction.where("amount <? AND transaction_date =?", -1000,params[:date_selected].to_date).order("csp_code ASC")
+    @transactions = Transaction.where("amount <? AND transaction_date =?", -1000,params[:date_selected].to_date)
 
     #render :layout => nil
     html = render_to_string :layout => false
@@ -112,6 +107,5 @@ class TransactionsController < ApplicationController
 
   end
   def export_form
-
   end
 end

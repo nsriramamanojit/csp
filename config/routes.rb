@@ -9,7 +9,7 @@ Csp::Application.routes.draw do
     post 'csv_import',:on=>:collection
   end
 
-  # root :to => "welcome#index"
+  root :to => "accounts#index"
 
   # match ':controller(/:action(/:id(.:format)))'
 end
