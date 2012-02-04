@@ -95,4 +95,12 @@ class AccountsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  def export
+    @accounts = Account.order("account_number ASC")
+    #render :layout => nil
+    html = render_to_string :layout => false
+    kit = PDFKit.new(html, :orientation => 'Landscape', :page_size => 'A4')
+    send_data(kit.to_pdf, :filename => "Account_Statement.pdf", :type => 'application/pdf')
+
+  end
 end

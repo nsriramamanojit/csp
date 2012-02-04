@@ -3,8 +3,10 @@
   * List of All CSP Accounts.<br/>
 </div>
 <%= link_to 'New Account', {:action => :new}, :class=>'more' %>&nbsp;
-<%= link_to 'Import Accounts', "#", :class=>'more ',  :id=>'add_new' %>&nbsp;
-<%= link_to 'Transactions Statement', transactions_path, :class=>'more'%>&nbsp;
+<%= link_to 'Import Accounts', "#", :class=>'more ', :id=>'add_new' %>&nbsp;
+<%# link_to 'Export Accounts', {:action=>:export}, :class=>'more ' %>
+<%= link_to 'Transactions Statement', transactions_path, :class=>'more' %>&nbsp;
+<%= link_to 'Transactions Statement', transactions_path, :class=>'more' %>&nbsp;
 
 <div id="new_form">
   <%= render 'upload' %>
@@ -30,15 +32,25 @@
     <% @accounts.each do |account| %>
         <tr align="left">
           <td><%= i %></td>
-          <td><%= link_to highlight(account.name,params[:search]) , account,:class => "link" %></td>
-          <td align="center"><%= highlight(account.csp_code,params[:search]) %></td>
+          <td><%= link_to highlight(account.name.titleize, params[:search]), account, :class => "link" %></td>
+          <td align="center"><%= highlight(account.csp_code, params[:search]) %></td>
           <td><%= account.mobile %></td>
-          <td><%= account.district %></td>
+          <td>
+            <% if account.district? %>
+                <%= account.district.titleize %>
+            <% else %>
+            <% end %>
+          </td>
           <td><%= account.bank_name %></td>
-          <td><%= account.bank_branch %></td>
+          <td>
+            <% if account.bank_branch? %>
+                <%= account.bank_branch.titleize %>
+            <% else %>
+            <% end %>
+          </td>
           <td><%= account.bank_code %></td>
           <td><%= account.account_number %></td>
-          <td align="center"><%= link_to "Edit", edit_account_path(account)%></td>
+          <td align="center"><%= link_to "Edit", edit_account_path(account) %></td>
         </tr>
         <% i = i + 1 %>
     <% end %>

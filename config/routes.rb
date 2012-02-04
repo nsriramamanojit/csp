@@ -7,6 +7,7 @@ Csp::Application.routes.draw do
 
   resources :accounts  do
     post 'csv_import',:on=>:collection
+    get 'export',:on=>:collection
   end
 
   root :to => "accounts#index"
