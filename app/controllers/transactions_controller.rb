@@ -1,6 +1,6 @@
 class TransactionsController < ApplicationController
   before_filter  :recent_items
-
+  layout "admin"
   def index
     @transactions = Transaction.search(params[:search]).paginate(:page =>params[:page], :per_page=>20)
 
@@ -104,7 +104,7 @@ class TransactionsController < ApplicationController
 
     #render :layout => nil
     html = render_to_string :layout => false
-    kit = PDFKit.new(html, :orientation => 'Landscape', :page_size => 'A4')
+    kit = PDFKit.new(html,  :page_size => 'A4')
     send_data(kit.to_pdf, :filename => "Account_Statement.pdf", :type => 'application/pdf')
 
   end

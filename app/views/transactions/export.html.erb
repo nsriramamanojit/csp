@@ -1,7 +1,7 @@
-<h3 align="center">CSP Fund Transfer Statement of <%= params[:date_selected] %> </h3>
-<br/>
+<h5 align="center">CSP Fund Transfer Statement of <%= params[:date_selected] %> </h5>
+
 <% total = 0 %>
-<table cellspacing="1" border="1" align="center">
+<table class="tablesorter1" align="center">
   <thead>
   <tr>
     <th>SNo</th>
@@ -17,9 +17,9 @@
       <tr align="left">
         <td><%= i %></td>
         <td><%= tr.csp_code %></td>
-        <td><%= get_csp_name(tr) %></td>
+        <td><%= get_csp_name(tr).titleize %></td>
         <td><%= get_csp_account_number(tr) %></td>
-        <td><%= get_csp_branch(tr) %></td>
+        <td><%= get_csp_branch(tr).titleize %></td>
         <% amount = (-1) * tr.amount %>
         <td align="right"><%= amount= amount % 100 == 0 ? amount : amount - (amount % 100) %></td>
         <% total += amount %>
@@ -31,4 +31,18 @@
     <td align="right"><%= total %></td>
   </tr>
 </table>
+
+<style type="text/css">
+  table.tablesorter1 {
+	border-collapse: collapse;
+	border: 1px solid #000000;
+      font-size: 10px;
+
+}
+  table.tablesorter1 td, table.tablesorter1 th{
+      border-collapse: collapse;
+      border: 1px solid #000000;
+  }
+
+</style>
 

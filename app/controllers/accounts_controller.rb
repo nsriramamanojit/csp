@@ -1,5 +1,6 @@
 require 'csv'
 class AccountsController < ApplicationController
+  layout "admin"
   before_filter  :recent_items
 
   def index
@@ -13,12 +14,8 @@ class AccountsController < ApplicationController
 
   def show
     @account = Account.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @account }
-    end
-  end
+   render :layout => "application"
+   end
 
   def new
     @account = Account.new
@@ -31,6 +28,8 @@ class AccountsController < ApplicationController
 
   def edit
     @account = Account.find(params[:id])
+    render :layout => "application"
+
   end
 
   def create
