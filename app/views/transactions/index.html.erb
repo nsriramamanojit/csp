@@ -1,10 +1,10 @@
-<h3>Accounts | Manage Accounts</h3>
+<h3>Transactions | Manage Transactions</h3>
 <div class="help_text">
   * List of All CSP Transactions.<br/>
 </div>
- <%= link_to 'Import Statment', "#", :class=>'more', :id=>'add_new' %>&nbsp;
- <%= link_to 'Export Statement' ,"#", :class=>'more',:id=>'export_add' %>&nbsp;
- <%= link_to 'Accounts' ,accounts_path, :class=>'more' %>&nbsp;
+<%= link_to 'Import Statment', "#", :class=>'more', :id=>'add_new' %>&nbsp;
+<%= link_to 'Export Statement', "#", :class=>'more', :id=>'export_add' %>&nbsp;
+<%= link_to 'Accounts', accounts_path, :class=>'more' %>&nbsp;
 <div id="new_form">
   <%= render 'upload' %>
 </div>
@@ -18,11 +18,11 @@
       <th>SNo</th>
       <th>Date</th>
       <th>CSP Code</th>
-<!--
-      <th>CSP Name</th>
-      <th>Account No</th>
-      <th>Branch</th>
--->
+      <!--
+            <th>CSP Name</th>
+            <th>Account No</th>
+            <th>Branch</th>
+      -->
       <th>Holding Amount</th>
     </tr>
     </thead>
@@ -31,15 +31,13 @@
         <tr align="left">
           <td><%= i %></td>
           <td><%= tr.transaction_date.strftime("%d-%m-%Y") %></td>
-          <td><%= tr.csp_code %></td>
+          <td><%= highlight(tr.csp_code, params[:search]) %></td>
 <!--
           <td><%# get_csp_name(tr) %></td>
           <td><%# get_csp_account_number(tr)  %></td>
           <td><%# get_csp_branch(tr)  %></td>
 -->
-
           <td align="right"><%= tr.amount %></td>
-
         </tr>
         <% i = i + 1 %>
     <% end %>

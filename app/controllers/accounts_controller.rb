@@ -1,5 +1,7 @@
 require 'csv'
 class AccountsController < ApplicationController
+  before_filter  :recent_items
+
   def index
     @accounts = Account.search(params[:search]).paginate(:page =>params[:page], :per_page=>20)
 
@@ -102,5 +104,10 @@ class AccountsController < ApplicationController
     kit = PDFKit.new(html, :orientation => 'Landscape', :page_size => 'A4')
     send_data(kit.to_pdf, :filename => "Account_Statement.pdf", :type => 'application/pdf')
 
+  end
+############################
+    private
+  def recent_items
+    @recent_accounts = Account.order('id DESC').limit(5)
   end
 end

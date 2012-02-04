@@ -1,6 +1,9 @@
-<h1>Editing account</h1>
-
+<h3>Accounts | Edit Account</h3>
+<div class="list">
+  <div class="help_text">
+    * Edit the below form for Account.<br/>* Please check all entries before Save.
+  </div>
 <%= render 'form' %>
-
-<%= link_to 'Show', @account %> |
-<%= link_to 'Back', accounts_path %>
+<%= link_to 'Show', @account, :class=>"more" %> &nbsp;
+<%= link_to 'Back to Accounts', accounts_path,:class=>"more" %>
+</div>

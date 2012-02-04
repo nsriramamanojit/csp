@@ -1,6 +1,6 @@
 <h4>Please Select the Transactions File</h4>
 <% form_tag csv_import_transactions_path, :multipart => true do  -%>
-<table class="tablesorter">
+<table class="tablesorter1" align="center">
 <tr>
     <td>
         <label for="vle_user">
@@ -8,7 +8,13 @@
         </label>
     </td>
     <td>
-        <%= file_field_tag :file -%>
+        <%= file_field_tag :file,:id=>"statename" -%>
+                  <script type="text/javascript">
+                var statename = new LiveValidation('statename', {
+                    onlyOnSubmit: true
+                });
+                statename.add(Validate.Presence)
+            </script>
     </td>
 </tr>
 <tr>
@@ -33,3 +39,15 @@
         $("#start_date").datepicker({dateFormat:'dd-mm-yy', maxDate:0 });
     });
 </script>
+<style type="text/css">
+  table.tablesorter1 {
+	border-collapse: collapse;
+	border: 1px solid #000000;
+	text-align: center;
+}
+  table.tablesorter1 td, table.tablesorter1 th{
+      border-collapse: collapse;
+      border: 1px solid #000000;
+  }
+
+</style>

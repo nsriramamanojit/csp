@@ -1,6 +1,8 @@
 class TransactionsController < ApplicationController
+  before_filter  :recent_items
+
   def index
-    @transactions = Transaction.paginate(:page =>params[:page], :per_page=>20)
+    @transactions = Transaction.search(params[:search]).paginate(:page =>params[:page], :per_page=>20)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -107,5 +109,10 @@ class TransactionsController < ApplicationController
 
   end
   def export_form
+  end
+  ############################
+    private
+  def recent_items
+    @recent_accounts = Account.order('id DESC').limit(5)
   end
 end

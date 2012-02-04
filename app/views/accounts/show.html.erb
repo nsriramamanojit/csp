@@ -2,15 +2,25 @@
 <div class="formbox">
   <div class="desc">CSP Code : <%= @account.csp_code %></div>
   <div class="divider"></div>
-  <div class="desc">CSP Name : <%= @account.name %></div>
+  <div class="desc">CSP Name : <%= @account.name.titleize %></div>
   <div class="divider"></div>
   <div class="desc">Phone : <%= @account.mobile %></div>
   <div class="divider"></div>
-  <div class="desc">District : <%= @account.district %></div>
+  <div class="desc">District :
+    <% if @account.district? %>
+        <%= @account.district.titleize %>
+    <% else %>
+    <% end %>
+  </div>
   <div class="divider"></div>
   <div class="desc">Bank : <%= @account.bank_name %></div>
   <div class="divider"></div>
-  <div class="desc">Branch : <%= @account.bank_branch %></div>
+  <div class="desc">Branch :
+    <% if @account.bank_branch? %>
+        <%= @account.bank_branch.titleize %>
+    <% else %>
+    <% end %>
+  </div>
   <div class="divider"></div>
   <div class="desc">Branch Code : <%= @account.bank_code %></div>
   <div class="divider"></div>

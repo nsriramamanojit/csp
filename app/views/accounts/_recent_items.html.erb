@@ -1,0 +1,10 @@
+<% for ac in  @recent_accounts %>
+<li class="" id="recent_account_<%= ac.id%>">
+    <dt>
+        <%=link_to truncate(ac.name,:length=>27),account_path(ac) %>
+    </dt>
+    <tt>
+        <br/>
+    </tt>
+</li>
+<% end %>
