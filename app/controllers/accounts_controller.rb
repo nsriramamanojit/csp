@@ -1,3 +1,7 @@
+# Author: Chaitanya Ram
+# Controller: Accounts
+# Date: 03022012
+######################################################
 require 'csv'
 class AccountsController < ApplicationController
   layout "admin"
@@ -29,7 +33,6 @@ class AccountsController < ApplicationController
   def edit
     @account = Account.find(params[:id])
     render :layout => "application"
-
   end
 
   def create
@@ -97,10 +100,9 @@ class AccountsController < ApplicationController
     end
   end
   def export
-    @accounts = Account.order("account_number ASC")
-    #render :layout => nil
+    @accounts = Account.all
     html = render_to_string :layout => false
-    kit = PDFKit.new(html, :orientation => 'Landscape', :page_size => 'A4')
+    kit = PDFKit.new(html, :page_size => 'A4')
     send_data(kit.to_pdf, :filename => "Account_Statement.pdf", :type => 'application/pdf')
 
   end

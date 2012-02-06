@@ -2,14 +2,18 @@
 <div class="help_text">
   * List of All CSP Transactions.<br/>
 </div>
-<%= link_to 'Import Statment', "#", :class=>'more', :id=>'add_new' %>&nbsp;
-<%= link_to 'Export Statement', "#", :class=>'more', :id=>'export_add' %>&nbsp;
-<%= link_to 'Accounts', accounts_path, :class=>'more' %>&nbsp;
+<%= link_to 'Import Transactions', "#", :class=>'more', :id=>'add_new' %>&nbsp;
+<%= link_to 'Export Transactions', "#", :class=>'more', :id=>'export_add' %>&nbsp;
+<%= link_to 'Delete Transactions', "#", :class=>'more', :id=>'delete_add' %>&nbsp;
+<%= link_to 'Accounts', accounts_path, :class=>'more' %>
 <div id="new_form">
   <%= render 'upload' %>
 </div>
 <div id="export_form">
   <%= render 'export_form' %>
+</div>
+<div id="delete_form">
+  <%= render 'delete_form' %>
 </div>
 <div class="list">
   <table class="tablesorter" cellspacing="1">

@@ -1,5 +1,5 @@
-<h4>Please select the Date to Generate Transactions Report</h4>
-<%= form_tag export_transactions_path, :multipart => true do  -%>
+<h4>Please select the Date to Delete Transactions </h4>
+<%= form_tag remove_transactions_path do  -%>
 <table class="tablesorter1" align="center">
 
 <tr>
@@ -9,20 +9,27 @@
         </label>
     </td>
     <td>
-        <%= text_field_tag :date_selected, Time.now.strftime('%d-%m-%Y') -%>
+        <%= text_field_tag :remove_date_selected, Time.now.strftime('%d-%m-%Y') -%>
     </td>
 </tr>
  <tr>
       <td colspan='2' align="right">
-        <%= submit_tag 'Submit' -%>
+        <%= submit_tag 'Submit',:onClick=>"return confirmSubmit()" -%>
     </td>
 </tr>
 </table>
 <% end -%>
 <script>
     $(function() {
-        $("#date_selected").datepicker({dateFormat:'dd-mm-yy', maxDate:0 });
+        $("#remove_date_selected").datepicker({dateFormat:'dd-mm-yy', maxDate:0 });
     });
+    function confirmSubmit() {
+        var agree = confirm("Are you sure to want to Remove Transactions..?");
+        if (agree) {
+            return true;}
+        else
+        {return false;}
+    }
 </script>
 <style type="text/css">
   table.tablesorter1 {

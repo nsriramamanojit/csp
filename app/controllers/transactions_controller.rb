@@ -1,8 +1,11 @@
+# Author: Chaitanya Ram N
+# Date: 03022012
+#########################################################
 class TransactionsController < ApplicationController
   before_filter  :recent_items
   layout "admin"
   def index
-    @transactions = Transaction.search(params[:search]).paginate(:page =>params[:page], :per_page=>20)
+    @transactions = Transaction.search(params[:search]).paginate(:page =>params[:page], :per_page=>20).order("transaction_date DESC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -85,7 +88,7 @@ class TransactionsController < ApplicationController
       transaction.save
       n = n + 1
     end
-    flash[:notice]= "#{n} Transactions are imported successfully"
+    flash[:success]= "#{n} Transactions are imported successfully"
     respond_to do |format|
       format.html { redirect_to(transactions_path) }
       format.xml  { head :ok }
@@ -102,9 +105,22 @@ class TransactionsController < ApplicationController
   end
   def export_form
   end
+  def delete_form
+
+  end
+  def remove
+    @transactions = Transaction.where(:transaction_date => params[:remove_date_selected].to_date)
+    flash[:error]= "#{@transactions.size} Transactions are Removed successfully"
+    @transactions.delete_all
+    respond_to do |format|
+      format.html { redirect_to(transactions_url) }
+      format.xml  { head :ok }
+    end
+
+  end
   ############################
     private
   def recent_items
-    @recent_accounts = Account.order('id DESC').limit(5)
+    @recent_transactions = Transaction.order('id DESC').limit(5)
   end
 end

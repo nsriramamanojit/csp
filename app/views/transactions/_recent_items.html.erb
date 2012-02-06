@@ -1,5 +1,5 @@
-<% for ac in  @recent_accounts %>
-<li class="" id="recent_account_<%= ac.id%>">
+<% for ac in  @recent_transactions %>
+<li class="" id="recent_transaction_<%= ac.id%>">
     <dt>
         <%=link_to truncate(ac.csp_code,:length=>27),account_path(ac) %>
     </dt>
