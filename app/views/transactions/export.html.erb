@@ -1,5 +1,5 @@
-<h5 align="center">CSP Fund Transfer Statement of <%= params[:date_selected] %> </h5>
-
+<h3 align="center">CSP Fund Transfer Statement of <%= params[:date_selected] %> </h3>
+<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
 <% total = 0 %>
 <table class="tablesorter1" align="center">
   <thead>
@@ -27,22 +27,29 @@
       <% i = i + 1 %>
   <% end %>
   <tr>
-    <td colspan="5" align="right">Total</td>
+    <td colspan="5" align="right">Total: </td>
     <td align="right"><%= total %></td>
   </tr>
 </table>
 
 <style type="text/css">
-  table.tablesorter1 {
-	border-collapse: collapse;
-	border: 1px solid #000000;
-      font-size: 12px;
+    table.tablesorter1 {
+        border-collapse: collapse;
+        border: 1px solid #000000;
+        font-family: 'Ubuntu', sans-serif;
+        font-weight: 400;
+    }
 
-}
-  table.tablesorter1 td, table.tablesorter1 th{
-      border-collapse: collapse;
-      border: 1px solid #000000;
-  }
+    table.tablesorter1 td, table.tablesorter1 th {
+        border-collapse: collapse;
+        border: 1px solid #000000;
+    }
+    h3
+    {
+        font-family: 'Ubuntu', sans-serif;
+        font-weight: 400;
+
+    }
 
 </style>
 

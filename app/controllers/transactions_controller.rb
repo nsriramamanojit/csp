@@ -100,7 +100,7 @@ class TransactionsController < ApplicationController
     #render :layout => nil
     html = render_to_string :layout => false
     kit = PDFKit.new(html,  :page_size => 'A4')
-    send_data(kit.to_pdf, :filename => "Account_Statement.pdf", :type => 'application/pdf')
+    send_data(kit.to_pdf, :filename => "Account_Statement_" + params[:date_selected] +".pdf", :type => 'application/pdf')
 
   end
   def export_form
