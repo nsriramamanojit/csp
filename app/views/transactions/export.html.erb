@@ -17,9 +17,9 @@
       <tr align="left">
         <td><%= i %></td>
         <td><%= tr.csp_code %></td>
-        <td><%= get_csp_name(tr).titleize %></td>
+        <td><%= get_csp_name(tr) %></td>
         <td><%= get_csp_account_number(tr) %></td>
-        <td><%= get_csp_branch(tr).titleize %></td>
+        <td><%= get_csp_branch(tr) %></td>
         <% amount = (-1) * tr.amount %>
         <td align="right"><%= amount= amount % 100 == 0 ? amount : amount - (amount % 100) %></td>
         <% total += amount %>
@@ -36,8 +36,8 @@
     table.tablesorter1 {
         border-collapse: collapse;
         border: 1px solid #000000;
-        font-family: 'Ubuntu', sans-serif;
-        font-weight: 400;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
     }
 
     table.tablesorter1 td, table.tablesorter1 th {

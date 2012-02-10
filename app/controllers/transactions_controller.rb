@@ -95,7 +95,7 @@ class TransactionsController < ApplicationController
     end
   end
   def export
-    @transactions = Transaction.where("amount <? AND transaction_date =?", -1000,params[:date_selected].to_date)
+    @transactions = Transaction.where("amount <=? AND transaction_date =?", -1000,params[:date_selected].to_date)
 
     #render :layout => nil
     html = render_to_string :layout => false
