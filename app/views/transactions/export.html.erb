@@ -1,4 +1,4 @@
-<h3 align="center">CSP Fund Transfer Statement of <%= params[:date_selected] %> </h3>
+<h5 align="center">CSP Fund Transfer Statement of <%= params[:date_selected] %> </h5>
 <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
 <% total = 0 %>
 <table class="tablesorter1" align="center">
@@ -17,9 +17,9 @@
       <tr align="left">
         <td><%= i %></td>
         <td><%= tr.csp_code %></td>
-        <td><%= get_csp_name(tr) %></td>
+        <td><%= get_csp_name(tr).titleize %></td>
         <td><%= get_csp_account_number(tr) %></td>
-        <td><%= get_csp_branch(tr) %></td>
+        <td><%= get_csp_branch(tr).titleize %></td>
         <% amount = (-1) * tr.amount %>
         <td align="right"><%= amount= amount % 100 == 0 ? amount : amount - (amount % 100) %></td>
         <% total += amount %>
@@ -44,7 +44,7 @@
         border-collapse: collapse;
         border: 1px solid #000000;
     }
-    h3
+    h5
     {
         font-family: 'Ubuntu', sans-serif;
         font-weight: 400;
