@@ -10,8 +10,8 @@ gem "jquery-rails"
 gem 'will_paginate'
 gem 'pdfkit'
 gem "meta_where"
-gem "simple_form"
 gem 'client_side_validations'
+gem "simple_form", "1.5.2"
 #gem "nifty-generators", :group => :development
 
 # Use unicorn as the web server

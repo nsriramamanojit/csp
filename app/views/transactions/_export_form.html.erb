@@ -1,38 +1,52 @@
 <h4>Please select the Date to Generate Transactions Report</h4>
-<%= form_tag export_transactions_path, :multipart => true do  -%>
-<table class="tablesorter1" align="center">
+<%= form_tag export_transactions_path, :multipart => true do -%>
+    <table class="tablesorter1" align="center">
 
-<tr>
-      <td>
-        <label for="vle_user">
+      <tr>
+        <td>
+          <label for="vle_user">
             Select a Date :
-        </label>
-    </td>
-    <td>
-        <%= text_field_tag :date_selected, Time.now.strftime('%d-%m-%Y') -%>
-    </td>
-</tr>
- <tr>
-      <td colspan='2' align="right">
-        <%= submit_tag 'Submit' -%>
-    </td>
-</tr>
-</table>
+          </label>
+        </td>
+
+        <td>
+          <%= text_field_tag :date_selected, Time.now.strftime('%d-%m-%Y') -%>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="vle_user">
+            Select a Export Format :
+          </label>
+        </td>
+
+        <td>
+          <%= radio_button_tag 'theme', 'pdf', true %> PDF
+          <%= radio_button_tag 'theme', 'excel' %> EXCEL
+        </td>
+      </tr>
+      <tr>
+        <td colspan='2' align="right">
+          <%= submit_tag 'Submit' -%>
+        </td>
+      </tr>
+    </table>
 <% end -%>
 <script>
-    $(function() {
+    $(function () {
         $("#date_selected").datepicker({dateFormat:'dd-mm-yy', maxDate:0 });
     });
 </script>
 <style type="text/css">
-  table.tablesorter1 {
-	border-collapse: collapse;
-	border: 1px solid #CDCDCD;
-	text-align: center;
-}
-  table.tablesorter1 td, table.tablesorter1 th{
-      border-collapse: collapse;
-      border: 1px solid #CDCDCD;
-  }
+    table.tablesorter1 {
+        border-collapse: collapse;
+        border: 1px solid #CDCDCD;
+        text-align: center;
+    }
+
+    table.tablesorter1 td, table.tablesorter1 th {
+        border-collapse: collapse;
+        border: 1px solid #CDCDCD;
+    }
 
 </style>

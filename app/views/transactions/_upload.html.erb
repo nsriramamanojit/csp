@@ -1,53 +1,54 @@
 <h4>Please Select the Transactions File</h4>
-<%= form_tag csv_import_transactions_path, :multipart => true do  -%>
-<table class="tablesorter1" align="center">
-<tr>
-    <td>
-        <label for="vle_user">
+<%= form_tag csv_import_transactions_path, :multipart => true do -%>
+    <table class="tablesorter1" align="center">
+      <tr>
+        <td>
+          <label for="vle_user">
             Select a CSV File :
-        </label>
-    </td>
-    <td>
-        <%= file_field_tag :file,:id=>"statename" -%>
-                  <script type="text/javascript">
-                var statename = new LiveValidation('statename', {
-                    onlyOnSubmit: true
-                });
-                statename.add(Validate.Presence)
-            </script>
-    </td>
-</tr>
-<tr>
-      <td>
-        <label for="vle_user">
+          </label>
+        </td>
+        <td>
+          <%= file_field_tag :file, :id => "statename" -%>
+          <script type="text/javascript">
+              var statename = new LiveValidation('statename', {
+                  onlyOnSubmit:true
+              });
+              statename.add(Validate.Presence)
+          </script>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="vle_user">
             Select a Date :
-        </label>
-    </td>
-    <td>
-        <%= text_field_tag :start_date, Time.now.strftime('%d-%m-%Y') -%>
-    </td>
-</tr>
- <tr>
-      <td colspan='2' align="right">
-        <%= submit_tag 'Submit' ,:disable_with=>'Please wait...'-%>
-    </td>
-</tr>
-</table>
+          </label>
+        </td>
+        <td>
+          <%= text_field_tag :start_date, Time.now.strftime('%d-%m-%Y') -%>
+        </td>
+      </tr>
+      <tr>
+        <td colspan='2' align="right">
+          <%= submit_tag 'Submit', :disable_with => 'Please wait...' -%>
+        </td>
+      </tr>
+    </table>
 <% end -%>
 <script>
-    $(function() {
+    $(function () {
         $("#start_date").datepicker({dateFormat:'dd-mm-yy', maxDate:0 });
     });
 </script>
 <style type="text/css">
-  table.tablesorter1 {
-	border-collapse: collapse;
-	border: 1px solid #CDCDCD;
-	text-align: center;
-}
-  table.tablesorter1 td, table.tablesorter1 th{
-      border-collapse: collapse;
-      border: 1px solid #CDCDCD;
-  }
+    table.tablesorter1 {
+        border-collapse: collapse;
+        border: 1px solid #CDCDCD;
+        text-align: center;
+    }
+
+    table.tablesorter1 td, table.tablesorter1 th {
+        border-collapse: collapse;
+        border: 1px solid #CDCDCD;
+    }
 
 </style>
