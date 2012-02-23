@@ -1,16 +1,16 @@
 class CreateAccounts < ActiveRecord::Migration
   def self.up
     create_table :accounts do |t|
-      t.string  :csp_code
-      t.string  :account_number
-      t.string  :name
-      t.string  :mobile
-      t.string  :district
-      t.string  :bank_name
-      t.string  :bank_branch
-      t.string  :bank_code
-      t.integer :balance
-      t.boolean :status
+      t.string  :csp_code, :null=>false
+      t.string  :account_number, :default=>"N.A"
+      t.string  :name,:default=>"N.A"
+      t.string  :mobile,:default=>"N.A"
+      t.string  :district,:default=>"N.A"
+      t.string  :bank_name,:default=>"N.A"
+      t.string  :bank_branch,:default=>"N.A"
+      t.string  :bank_code,:default=>"N.A"
+      t.integer :balance,:default=>0
+      t.boolean :status,:default=>1
 
       t.integer :created_by
       t.integer :modified_by
