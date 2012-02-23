@@ -1,0 +1,21 @@
+<h3>Users | User Profile</h3>
+<div class="formbox">
+<div class="showregionnamedesc">
+  Name : <%= @user.name %>
+</div>
+<div class="divider">
+</div>
+<div class="showregionnamedesc">
+  Email : <%= @user.email %>
+</div>
+<div class="divider">
+</div>
+<div class="showregionnamedesc">
+  Mobile : <%= @user.mobile_number %>
+</div>
+
+</div>
+<div class="bottom_links">
+  <%=  link_to "Edit Profile",{:action=>:edit_profile,:id=>current_user.id},:class=>"more" %>
+  <%=  link_to "Change Password",{:action=>:change_password,:id=>current_user.id},:class=>"more" %>
+</div>

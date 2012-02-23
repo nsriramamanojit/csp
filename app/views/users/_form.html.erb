@@ -1,0 +1,19 @@
+<div class="form-container">
+    <p class="legend">
+        <strong>Note:</strong>
+        Required fields are marked with an asterisk (<em>*</em>)
+    </p>
+<%= simple_form_for(@user, :validate => true) do |f| %>
+      <fieldset>
+
+  <%= f.input :login, :label => 'Enter Login Name' %>
+  <%= f.input :name, :label => 'Enter Full Name' %>
+  <%= f.input :password, :label => 'Enter Desired Password' %>
+  <%= f.input :password_confirmation, :label => 'Enter Re-enter Desired password' %>
+  <%= f.input :email, :label => 'Enter Email' %>
+  <%= f.input :mobile_number, :label => 'Enter Mobile Number' %>
+  <%= f.submit 'Save',:disable_with=>'Please wait...'%>
+        </fieldset>
+
+  <% end %>
+</div>

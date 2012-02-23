@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <title>BC-BIHAR</title>
+  <%= javascript_include_tag 'application' %>
+  <%= stylesheet_link_tag 'admin_screen', 'style' %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+<div class="tabless">
+
+  <div style="position: relative; left: 0px; top: 0px;" class="standalone" id="standalone">
+    <%= render :partial=>'/import_flash' %>
+    <%= form_for @user_session, :url =>{:action => "create"}  do |f| %>
+        <div class="title">
+          Welcome to BC-BIHAR
+        </div>
+        <div class="section">
+          <div class="label">
+            User Name :
+          </div>
+          <%= f.text_field :login %>
+          <div class="label">
+            Password :
+          </div>
+          <%= f.password_field :password %>
+        </div>
+
+
+        <div class="buttonbar">
+          <%= f.submit "Login" %>
+        </div>
+    <% end %>
+  </div>
+</div>
+<center>
+  <div id="footer">
+    ©     <%= Time.now.strftime('%Y') %>
+<a href="http://vedavaag.com" target="_blank">Vedavaag</a> Systems Limited. This is site is optimized to Firefox, Google Chrome and IE8+ Versions.
+  </div>
+</center>
+</body>
+</html>

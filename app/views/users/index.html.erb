@@ -1,0 +1,31 @@
+<h3>Users | Manage Users</h3>
+<div class="help_text">
+  * List of All CSP Users.
+</div>
+<%= link_to 'New User', new_user_path, :class=>'more' %>
+
+<div class="list">
+  <table class="tablesorter" cellspacing="1">
+    <thead>
+    <tr>
+      <th>SNo</th>
+      <th>Name</th>
+      <th>Login</th>
+      <th>Email</th>
+      <th>Mobile</th>
+    </tr>
+    </thead>
+    <% i=1 %>
+    <% @users.each do |user| %>
+        <tr>
+          <td><%= i %></td>
+          <td><%= user.name %></td>
+          <td><%= user.login %></td>
+          <td><%= user.email %></td>
+          <td><%= user.mobile_number %></td>
+        </tr>
+        <% i = i + 1 %>
+    <% end %>
+  </table>
+</div>
+

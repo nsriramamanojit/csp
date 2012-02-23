@@ -8,10 +8,8 @@ class TransactionsController < ApplicationController
   def index
     @transactions = Transaction.search(params[:search]).paginate(:page => params[:page], :per_page => 20).order("transaction_date DESC")
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml { render :xml => @transactions }
-    end
+    render :layout => "application"
+
   end
 
   def show

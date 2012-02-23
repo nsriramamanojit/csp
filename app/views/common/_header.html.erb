@@ -1,20 +1,36 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
-  <title>SBI-KIOSK</title>
-  <%= stylesheet_link_tag 'style','admin_screen','common','jquery-ui-1.8.13.custom','live_validation' %>
-  <%= javascript_include_tag :defaults,'rails.validations.js','jquery-ui-1.8.13.custom.min','livevalidation_standalone.compressed' %>
-  <%= csrf_meta_tag %>
-</head>
-<body>
-<div id="page_container">
-  <div id="page_top">
-    <a href="/"><img src="images/bc_logo.png" ></a>
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <title>SBI-KIOSK</title>
+    <%= stylesheet_link_tag 'style','admin_screen','common','jquery-ui-1.8.13.custom','live_validation' %>
+    <%= javascript_include_tag :defaults,'rails.validations.js','jquery-ui-1.8.13.custom.min','livevalidation_standalone.compressed' %>
+    <%= csrf_meta_tag %>
+  </head>
+  <body>
+  <div id="page_container">
+    <div id="page_top">
+      <a href="#"><%= image_tag("/images/bc_logo.png", :size => "300x40", :alt => "Home") %></a>
 
-    <div id="top_menu">
-      <div id="top_m">
+      <div id="top_menu">
+        <div id="top_m">
 
+          <ul class="top_menu">
+            <li>
+              Welcome, <%= current_user.name %> !
+            </li>
+            <li>
+              <%= link_to 'Home', {:controller=>'generals', :action=>'index'} %>
+            </li>
+            <li>
+              <%= link_to 'Profile', {:controller=>'users', :action=>'profile', :id=>current_user.id}, :class=>"tipTip2", :title=>"Update Profile" %>
+            </li>
+            <li>
+
+              <%=link_to 'Logoff', logout_path, :id=>"logoff", :class=>"tipTip2", :title=>"Logoff" %>
+            </li>
+          </ul>
+
+        </div>
       </div>
     </div>
-  </div>
