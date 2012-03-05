@@ -5,29 +5,26 @@
 require 'csv'
 class AccountsController < ApplicationController
   layout "admin"
-  before_filter  :recent_items
+  before_filter :recent_items
 
   def index
-    @accounts = Account.search(params[:search]).paginate(:page =>params[:page], :per_page=>20)
+    @accounts = Account.search(params[:search]).paginate(:page => params[:page], :per_page => 20).order('csp_code ASC')
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @accounts }
+      format.xml { render :xml => @accounts }
     end
   end
 
   def show
     @account = Account.find(params[:id])
-   render :layout => "application"
-   end
+    render :layout => "application"
+  end
 
   def new
     @account = Account.new
+    render :layout => "application"
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @account }
-    end
   end
 
   def edit
@@ -41,10 +38,10 @@ class AccountsController < ApplicationController
     respond_to do |format|
       if @account.save
         format.html { redirect_to(@account, :notice => 'Account was successfully created.') }
-        format.xml  { render :xml => @account, :status => :created, :location => @account }
+        format.xml { render :xml => @account, :status => :created, :location => @account }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @account.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -55,10 +52,10 @@ class AccountsController < ApplicationController
     respond_to do |format|
       if @account.update_attributes(params[:account])
         format.html { redirect_to(@account, :notice => 'Account was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @account.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -69,9 +66,10 @@ class AccountsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(accounts_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
+
   def upload
 
   end
@@ -79,9 +77,9 @@ class AccountsController < ApplicationController
   def csv_import
     csv_file = params[:file]
     n=0
-    CSV.new(csv_file.tempfile,:col_sep => ",").each do |row|
+    CSV.new(csv_file.tempfile, :col_sep => ",").each do |row|
       account = Account.create do |acc|
-        acc.name  =row[0]
+        acc.name =row[0]
         acc.csp_code = row[1]
         acc.mobile = row[2]
         acc.district = row[3]
@@ -96,9 +94,10 @@ class AccountsController < ApplicationController
     flash[:notice]= "#{n} Accounts are imported successfully"
     respond_to do |format|
       format.html { redirect_to(accounts_path) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
+
   def export
     @accounts = Account.all
     html = render_to_string :layout => false
@@ -106,8 +105,9 @@ class AccountsController < ApplicationController
     send_data(kit.to_pdf, :filename => "Account_Statement.pdf", :type => 'application/pdf')
 
   end
+
 ############################
-    private
+  private
   def recent_items
     @recent_accounts = Account.order('id DESC').limit(5)
   end

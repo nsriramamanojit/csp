@@ -104,9 +104,28 @@ class TransactionsController < ApplicationController
       kit = PDFKit.new(html)
       send_data(kit.to_pdf, :filename => "Account_Statement_" + params[:date_selected] +".pdf", :type => 'application/pdf')
     else
-      headers['Content-Type'] = "application/vnd.ms-excel"
-      headers['Content-Disposition'] = 'attachment; filename="report.xls"'
-      headers['Cache-Control'] = ''
+      require 'csv'
+      total = 0
+      outfile = "Transaction_Report" + Time.now.strftime("%d-%m-%Y") + ".csv"
+      csv_data = CSV.generate do |csv|
+        @transactions.each do |tr|
+          account = Account.where(:csp_code => tr.csp_code).first
+          if account.blank?
+          else
+            if account.account_number == 'N.A' || account.account_number == '00000000000'
+            else
+              amount = (-1) * tr.amount
+              amount= amount % 100 == 0 ? amount : amount - (amount % 100)
+              total += amount
+              csv << [account.account_number,account.bank_code,Time.now.strftime("%d/%m/%Y"),'',"%.2f"%amount,account.csp_code,'CSP Transfer']
+            end
+          end
+        end
+        csv<<[31304092454,'03607',Time.now.strftime("%d/%m/%Y"),"%.2f"%total,'','3A43','CSP Transfer']
+      end
+      send_data csv_data,
+                :type => 'text/csv; charset=iso-8859-1; header=present',
+                :disposition => "attachment; filename=#{outfile}"
     end
   end
 
@@ -114,7 +133,6 @@ class TransactionsController < ApplicationController
   end
 
   def delete_form
-
   end
 
   def remove
@@ -125,11 +143,6 @@ class TransactionsController < ApplicationController
       format.html { redirect_to(transactions_url) }
       format.xml { head :ok }
     end
-
-  end
-
-  def export_excel
-    @transactions = Transaction.all
 
   end
 
