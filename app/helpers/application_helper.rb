@@ -23,4 +23,13 @@ module ApplicationHelper
     content << accounts.bank_branch
     content.html_safe
   end
+  def get_csp_branch_code(tr)
+    accounts = Account.where(:csp_code => tr.csp_code).first
+    return "N.A".html_safe if accounts.blank?
+    content =""
+    content << accounts.bank_code
+    content.html_safe
+  end
+
+
 end
