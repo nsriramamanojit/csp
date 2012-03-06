@@ -106,7 +106,7 @@ class TransactionsController < ApplicationController
     else
       require 'csv'
       total = 0
-      outfile = "Transaction_Report" + Time.now.strftime("%d-%m-%Y") + ".csv"
+      outfile = "Transaction_Report" + Time.now.strftime("%d-%m-%Y") + ".txt"
       csv_data = CSV.generate do |csv|
         @transactions.each do |tr|
           account = Account.where(:csp_code => tr.csp_code).first
@@ -117,14 +117,29 @@ class TransactionsController < ApplicationController
               amount = (-1) * tr.amount
               amount= amount % 100 == 0 ? amount : amount - (amount % 100)
               total += amount
-              csv << [account.account_number,account.bank_code,Time.now.strftime("%d/%m/%Y"),'',"%.2f"%amount,account.csp_code,'CSP Transfer']
+              #csv<<[31633006672,'03607',Time.now.strftime("%d/%m/%Y"),"%.2f"%amount,'','3A43'+account.csp_code,'CSP Transfer']
+              #csv << [account.account_number, account.bank_code, Time.now.strftime("%d/%m/%Y"), nil, "%.2f"%amount, account.csp_code, 'CSP Transfer']
             end
           end
         end
-        csv<<[31304092454,'03607',Time.now.strftime("%d/%m/%Y"),"%.2f"%total,'','3A43','CSP Transfer']
+        csv<<[31633006672, '03607', Time.now.strftime("%d/%m/%Y"), "%.2f"%total, nil, '3A43', 'CSP Transfer']
+        @transactions.each do |tr|
+          account = Account.where(:csp_code => tr.csp_code).first
+          if account.blank?
+          else
+            if account.account_number == 'N.A' || account.account_number == '00000000000'
+            else
+              amount = (-1) * tr.amount
+              amount= amount % 100 == 0 ? amount : amount - (amount % 100)
+              total += amount
+              csv << [account.account_number, account.bank_code, Time.now.strftime("%d/%m/%Y"), nil, "%.2f"%amount, account.csp_code, 'CSP Transfer']
+            end
+          end
+        end
+
       end
       send_data csv_data,
-                :type => 'text/csv; charset=iso-8859-1; header=present',
+                :type => 'text/csv; charset=UTF-8; header=present',
                 :disposition => "attachment; filename=#{outfile}"
     end
   end
@@ -143,7 +158,6 @@ class TransactionsController < ApplicationController
       format.html { redirect_to(transactions_url) }
       format.xml { head :ok }
     end
-
   end
 
   ############################

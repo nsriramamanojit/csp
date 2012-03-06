@@ -8,8 +8,8 @@
     <th>CSP Code</th>
     <th>Name</th>
     <th>Account</th>
-    <th>Branch</th>
-    <th>Branch Code</th>
+    <!--<th>Branch</th>-->
+    <th>Code</th>
     <th>Amount</th>
   </tr>
   </thead>
@@ -20,7 +20,7 @@
         <td><%= tr.csp_code %></td>
         <td><%= get_csp_name(tr).titleize %></td>
         <td><%= get_csp_account_number(tr) %></td>
-        <td><%= get_csp_branch(tr).titleize %></td>
+        <!--<td><%# get_csp_branch(tr).titleize %></td>-->
         <td><%= get_csp_branch_code(tr) %></td>
         <% amount = (-1) * tr.amount %>
         <td align="right"><%= amount= amount % 100 == 0 ? amount : amount - (amount % 100) %></td>
@@ -29,7 +29,7 @@
       <% i = i + 1 %>
   <% end %>
   <tr>
-    <td colspan="6" align="right">Total: </td>
+    <td colspan="5" align="right">Total: </td>
     <td align="right"><%= total %></td>
   </tr>
 </table>
