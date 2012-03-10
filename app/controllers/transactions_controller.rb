@@ -73,9 +73,7 @@ class TransactionsController < ApplicationController
   end
 
   def upload
-
   end
-
   def csv_import
     csv_file = params[:file]
     n=0
@@ -139,7 +137,7 @@ class TransactionsController < ApplicationController
 
       end
       send_data csv_data,
-                :type => 'text/csv; charset=UTF-8; header=present',
+                :type => 'text/csv; charset=UTF-8',
                 :disposition => "attachment; filename=#{outfile}"
     end
   end
