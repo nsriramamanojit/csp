@@ -75,6 +75,7 @@ class TransactionsController < ApplicationController
   def upload
   end
   def csv_import
+    require 'csv'
     csv_file = params[:file]
     n=0
     CSV.new(csv_file.tempfile, :col_sep => ",").each do |row|
