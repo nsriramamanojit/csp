@@ -6,7 +6,7 @@ class TransactionsController < ApplicationController
   layout "admin", :except => [:export]
 
   def index
-    @transactions = Transaction.search(params[:search]).paginate(:page => params[:page], :per_page => 20).order("transaction_date DESC")
+    @transactions = Transaction.search(params[:search]).paginate(:page => params[:page], :per_page => 50).order("transaction_date DESC")
 
     render :layout => "application"
 

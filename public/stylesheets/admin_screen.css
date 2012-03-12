@@ -706,7 +706,7 @@ div.auto_complete ul li.selected .highlight {
  */
 .flash_error, .flash_notice, .flash_success,.flash_warning {
 	padding:10px 10px;margin-bottom:1em;margin-top:1em;border:1px solid #cccccc;
-    font-size:12px;
+    font-size:11px;
     padding-left:30px;
     border-radius: 5px 5px 5px 5px;
 	}

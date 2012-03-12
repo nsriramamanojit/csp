@@ -15,7 +15,7 @@ class UserSessionsController < ApplicationController
 
     if @user_session.save
       flash[:notice] = "You are Logged in Successfully."
-      redirect_to(:controller=>'generals',:action=>'index')
+      redirect_to(transactions_path)
     else
       flash[:error] = "Please check Username and Password "
       render :action => :new
