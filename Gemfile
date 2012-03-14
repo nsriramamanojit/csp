@@ -13,6 +13,7 @@ gem "meta_where"
 gem 'client_side_validations'
 gem "simple_form", "1.5.2"
 gem "authlogic"
+gem "spreadsheet"
 #gem "nifty-generators", :group => :development
 
 # Use unicorn as the web server

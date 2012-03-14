@@ -97,15 +97,15 @@ class TransactionsController < ApplicationController
   def export
     @transactions = Transaction.where("amount <=? AND transaction_date =?", -1000, params[:date_selected].to_date)
 
-    if params[:theme] == "pdf"
+    if params[:theme] == "pdf"    ## for PDF
       #render :layout => nil
       html = render_to_string :layout => false
       kit = PDFKit.new(html)
       send_data(kit.to_pdf, :filename => "Account_Statement_" + params[:date_selected] +".pdf", :type => 'application/pdf')
-    else
+    elsif params[:theme]=="text"    ## for Text
       require 'csv'
       total = 0
-      outfile = "Transaction_Report" + Time.now.strftime("%d-%m-%Y") + ".txt"
+      outfile = "Transaction_Report_" + Time.now.strftime("%d-%m-%Y") + ".txt"
       csv_data = CSV.generate do |csv|
         @transactions.each do |tr|
           account = Account.where(:csp_code => tr.csp_code).first
@@ -116,8 +116,6 @@ class TransactionsController < ApplicationController
               amount = (-1) * tr.amount
               amount= amount % 100 == 0 ? amount : amount - (amount % 100)
               total += amount
-              #csv<<[31633006672,'03607',Time.now.strftime("%d/%m/%Y"),"%.2f"%amount,'','3A43'+account.csp_code,'CSP Transfer']
-              #csv << [account.account_number, account.bank_code, Time.now.strftime("%d/%m/%Y"), nil, "%.2f"%amount, account.csp_code, 'CSP Transfer']
             end
           end
         end
@@ -138,8 +136,15 @@ class TransactionsController < ApplicationController
 
       end
       send_data csv_data,
-                :type => 'text/csv; charset=UTF-8',
+                :type => 'text/plain; charset=UTF-8',
                 :disposition => "attachment; filename=#{outfile}"
+    else     ##for EXCEL
+      outfile = "Transaction_Report_" + Time.now.strftime("%d-%m-%Y") + ".xls"
+
+      headers['Content-Type'] = "application/vnd.ms-excel"
+      headers['Content-Disposition'] = "attachment; filename=#{outfile}"
+      headers['Cache-Control'] = ''
+      render :report_excel
     end
   end
 
@@ -157,6 +162,9 @@ class TransactionsController < ApplicationController
       format.html { redirect_to(transactions_url) }
       format.xml { head :ok }
     end
+  end
+  def report_excel
+    @transactions = Transaction.where("amount <=? AND transaction_date =?", -1000, params[:date_selected].to_date)
   end
 
   ############################

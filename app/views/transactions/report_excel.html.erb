@@ -1,0 +1,28 @@
+<table>
+  <thead>
+  <tr>
+    <th>SR</th>
+    <th>KO ID</th>
+    <th>Amount</th>
+    <th>D/W</th>
+  </tr>
+  </thead>
+  <% i=1 %>
+  <% @transactions.each do |tr| %>
+<% account = Account.where(:csp_code => tr.csp_code).first %>
+<% if account.blank? %>
+<% else %>
+    <% if account.account_number == 'N.A' || account.account_number == '00000000000' %>
+    <% else %>
+        <tr>
+          <td><%= i %></td>
+          <td><%= tr.csp_code %></td>
+          <% amount = (-1) * tr.amount %>
+          <td><%= amount= amount % 100 == 0 ? amount : amount - (amount % 100) %></td>
+          <td>W</td>
+        </tr>
+        <% i = i + 1 %>
+    <% end %>
+<% end %>
+  <% end %>
+</table>
