@@ -9,9 +9,9 @@
         <%= f.input :csp_code, :label => 'Enter CSP Code', :placeholder => "3A430000" %>
         <%= f.input :mobile, :label => 'Enter Mobile Number', :placeholder => "Ex:9292929292" %>
         <%= f.input :bank_name, :label => 'Enter Bank Name', :input_html => {:value => 'SBI'} %>
-        <%= f.input :bank_branch, :label => "Enter Branch Name" %>
-        <%= f.input :bank_code, :label => "Enter Branch Code" %>
-        <%= f.input :account_number, :label => "Enter Account Number"%>
+        <%= f.input :bank_branch, :label => "Enter Branch Name",:input_html => {:value => 'N.A'} %>
+        <%= f.input :bank_code, :label => "Enter Branch Code",:input_html => {:value => '00000'} %>
+        <%= f.input :account_number, :label => "Enter Account Number",:input_html => {:value => '00000000000'}%>
         <%= f.submit 'Save', :disable_with => 'Please wait...' %>
       </fieldset>
   <% end %>
