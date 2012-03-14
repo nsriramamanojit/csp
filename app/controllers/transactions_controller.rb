@@ -143,7 +143,6 @@ class TransactionsController < ApplicationController
 
       headers['Content-Type'] = "application/vnd.ms-excel"
       headers['Content-Disposition'] = "attachment; filename=#{outfile}"
-      headers['Cache-Control'] = ''
       render :report_excel
     end
   end
@@ -165,6 +164,7 @@ class TransactionsController < ApplicationController
   end
   def report_excel
     @transactions = Transaction.where("amount <=? AND transaction_date =?", -1000, params[:date_selected].to_date)
+
   end
 
   ############################
