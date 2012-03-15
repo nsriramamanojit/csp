@@ -139,11 +139,41 @@ class TransactionsController < ApplicationController
                 :type => 'text/plain; charset=UTF-8',
                 :disposition => "attachment; filename=#{outfile}"
     else     ##for EXCEL
+=begin
       outfile = "Transaction_Report_" + Time.now.strftime("%d-%m-%Y") + ".xls"
-
       headers['Content-Type'] = "application/vnd.ms-excel"
       headers['Content-Disposition'] = "attachment; filename=#{outfile}"
+      headers['Cache-Control'] = ''
+
       render :report_excel
+=end
+      book = Spreadsheet::Workbook.new
+      sheet1 = book.create_worksheet
+      sheet1.row(0).concat  ["SR", "KO ID", "AMOUNT", "D/W"]
+      i=1
+     @transactions.each do |tr|
+       account = Account.where(:csp_code => tr.csp_code).first
+       if account.blank?
+       else
+         if account.account_number == 'N.A' || account.account_number == '00000000000'
+         else
+           amount = (-1) * tr.amount
+           amount= amount % 100 == 0 ? amount : amount - (amount % 100)
+
+           sheet1[i,0] = i
+          sheet1[i,1] = tr.csp_code
+          sheet1[i,2] = amount
+          sheet1[i,3] = 'W'
+        i+=1
+         end
+       end
+       end
+      @outfile = "Transaction_Report_Excel_" + Time.now.strftime("%d-%m-%Y") + ".xls"
+
+      require 'stringio'
+      data = StringIO.new ''
+      book.write data
+      send_data data.string, :type=>"application/excel", :disposition=>'attachment', :filename => @outfile
     end
   end
 
